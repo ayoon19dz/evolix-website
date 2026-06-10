@@ -1,0 +1,97 @@
+/* src/styles/theme-tokens.css — ui-ux-pro-max: AI/Chatbot Platform + Dark Mode OLED */
+
+:root {
+  /* Aurora gradient animation colors */
+  --aurora-1: #7c3aed;
+  --aurora-2: #06b6d4;
+  --aurora-3: #a78bfa;
+  --aurora-4: #0891b2;
+
+  /* Transition tokens (consistent motion) */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 300ms;
+  --duration-slow: 500ms;
+  --transition-default: var(--duration-base) var(--ease-out-expo);
+
+  /* AI accent system */
+  --ai-purple: #7c3aed;
+  --ai-indigo: #6366f1;
+  --ai-cyan:   #06b6d4;
+  --ai-green:  #10b981;
+}
+
+:root[data-theme="dark"] {
+  /* OLED-optimized backgrounds */
+  --bg-primary:    #020203;
+  --bg-secondary:  #070711;
+  --bg-card:       rgba(255, 255, 255, 0.05);
+  --bg-card-solid: #0f0f1a;
+
+  /* Text */
+  --text-primary:  #ededef;
+  --text-muted:    #94a3b8;
+  --text-subtle:   #4b5264;
+
+  /* Brand palette */
+  --brand:         #7c3aed;
+  --brand-accent:  #06b6d4;
+  --brand-mid:     #a78bfa;
+  --brand-glow:    rgba(124, 58, 237, 0.25);
+  --brand-rgb:     124, 58, 237;
+
+  /* Glass surfaces */
+  --glass-bg:      rgba(255, 255, 255, 0.04);
+  --glass-border:  rgba(255, 255, 255, 0.08);
+  --glass-blur:    20px;
+
+  /* Structural */
+  --border:        rgba(255, 255, 255, 0.08);
+  --shadow:        rgba(0, 0, 0, 0.7);
+  --shadow-brand:  rgba(124, 58, 237, 0.3);
+  --bg-navbar:     rgba(2, 2, 3, 0.85);
+}
+
+:root[data-theme="light"] {
+  /* Crisp light surfaces */
+  --bg-primary:    #f8fafc;
+  --bg-secondary:  #f1f5f9;
+  --bg-card:       rgba(255, 255, 255, 0.9);
+  --bg-card-solid: #ffffff;
+
+  /* Text */
+  --text-primary:  #0f172a;
+  --text-muted:    #64748b;
+  --text-subtle:   #94a3b8;
+
+  /* Brand palette */
+  --brand:         #7c3aed;
+  --brand-accent:  #0891b2;
+  --brand-mid:     #a78bfa;
+  --brand-glow:    rgba(124, 58, 237, 0.15);
+  --brand-rgb:     124, 58, 237;
+
+  /* Glass surfaces */
+  --glass-bg:      rgba(255, 255, 255, 0.8);
+  --glass-border:  rgba(124, 58, 237, 0.12);
+  --glass-blur:    20px;
+
+  /* Structural */
+  --border:        rgba(0, 0, 0, 0.08);
+  --shadow:        rgba(0, 0, 0, 0.1);
+  --shadow-brand:  rgba(124, 58, 237, 0.2);
+  --bg-navbar:     rgba(248, 250, 252, 0.95);
+}
+
+/* ─── Cross-browser Fallbacks ─── */
+/* If the browser doesn't support backdrop-filter, we provide solid or highly opaque colors to ensure text readability */
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  :root[data-theme="dark"] {
+    --glass-bg:      #111118;
+    --bg-navbar:     #020203;
+  }
+  :root[data-theme="light"] {
+    --glass-bg:      #ffffff;
+    --bg-navbar:     #f8fafc;
+  }
+}
