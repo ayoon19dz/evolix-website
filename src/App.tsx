@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound'
 import CustomCursor from './components/ui/CustomCursor'
 import IntroAnimation from './components/ui/IntroAnimation'
 import { useState, useCallback } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   const [introComplete, setIntroComplete] = useState(false)
@@ -29,6 +30,7 @@ function App() {
             </Routes>
           </BrowserRouter>
         </div>
+        <Analytics />
       </ThemeProvider>
     </LanguageProvider>
   )
