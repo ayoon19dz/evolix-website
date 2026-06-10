@@ -1,7 +1,7 @@
-import { useRef, useState, useCallback, useLayoutEffect } from 'react'
+import { useRef, useState, useCallback, useLayoutEffect, type ReactNode } from 'react'
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 
-export default function SmoothScroll({ children }: { children: React.ReactNode }) {
+export default function SmoothScroll({ children }: { children: ReactNode }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [pageHeight, setPageHeight] = useState(0)
 
@@ -12,12 +12,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   }, [])
 
   useLayoutEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) => resizePageHeight(entries))
+    const resizeObserver = new ResizeObserver(resizePageHeight)
     if (scrollRef.current) {
       resizeObserver.observe(scrollRef.current)
     }
     return () => resizeObserver.disconnect()
-  }, [scrollRef, resizePageHeight])
+  }, [resizePageHeight])
 
   const { scrollY } = useScroll()
   const transform = useTransform(scrollY, [0, pageHeight], [0, -pageHeight])
@@ -29,7 +29,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       <motion.div
         ref={scrollRef}
         style={{ y: spring }}
-        className="w-full fixed top-0 left-0 overflow-hidden"
+        className="w-full fixed top-0 left-0 will-change-transform"
       >
         {children}
       </motion.div>

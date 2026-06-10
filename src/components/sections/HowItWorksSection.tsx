@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 import { Search, Cog, TrendingUp, Sparkles } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
 
@@ -7,6 +8,32 @@ const stepColors = [
   { bg: 'from-[#06b6d4] to-[#0ea5e9]', glow: 'rgba(6,182,212,0.35)',   num: '02' },
   { bg: 'from-[#10b981] to-[#059669]', glow: 'rgba(16,185,129,0.35)',  num: '03' },
 ]
+
+function HowItWorksParallaxBg() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const slowY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%'])
+  return (
+    <div ref={ref} className="absolute inset-0 pointer-events-none overflow-hidden">
+      <motion.div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
+        style={{
+          y: slowY,
+          background: 'radial-gradient(ellipse, rgba(var(--brand-rgb),0.07) 0%, transparent 70%)',
+          filter: 'blur(40px)',
+        }}
+        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        aria-hidden="true"
+      />
+      <motion.div
+        className="absolute inset-0 bg-dot-pattern opacity-15"
+        style={{ y: useTransform(scrollYProgress, [0, 1], ['-4%', '4%']) }}
+        aria-hidden="true"
+      />
+    </div>
+  )
+}
 
 export default function HowItWorksSection() {
   const { t, lang } = useLanguage()
@@ -24,18 +51,7 @@ export default function HowItWorksSection() {
       className="py-20 px-6 relative overflow-hidden"
       style={{ background: 'var(--bg-primary)' }}
     >
-      {/* Subtle center glow */}
-      <motion.div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse, rgba(var(--brand-rgb),0.07) 0%, transparent 70%)',
-          filter: 'blur(40px)',
-        }}
-        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-dot-pattern opacity-15 pointer-events-none" aria-hidden="true" />
+      <HowItWorksParallaxBg />
 
       <div className="relative z-10 max-w-7xl mx-auto">
 

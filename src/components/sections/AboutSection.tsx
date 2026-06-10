@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { useEffect } from 'react'
+import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 import { useLanguage } from '../../hooks/useLanguage'
 import { Award, TrendingUp, Users, Sparkles } from 'lucide-react'
 
@@ -21,6 +21,30 @@ const statCards = [
   { prefix: '',  value: 99, suffix: '%', icon: Users,     gradient: 'from-[#10b981] to-[#059669]', glow: 'rgba(16,185,129,0.3)',  key: 'satisfaction', wide: true },
 ]
 
+function AboutParallaxBg() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  return (
+    <div ref={ref} className="absolute inset-0 pointer-events-none overflow-hidden">
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          y: useTransform(scrollYProgress, [0, 1], ['-10%', '10%']),
+          background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(var(--brand-rgb),0.06) 0%, transparent 70%)',
+        }}
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        aria-hidden="true"
+      />
+      <motion.div
+        className="absolute inset-0 bg-dot-pattern opacity-20"
+        style={{ y: useTransform(scrollYProgress, [0, 1], ['-5%', '5%']) }}
+        aria-hidden="true"
+      />
+    </div>
+  )
+}
+
 export default function AboutSection() {
   const { t } = useLanguage()
   const ease = [0.16, 1, 0.3, 1] as const
@@ -32,17 +56,7 @@ export default function AboutSection() {
       style={{ background: 'var(--bg-primary)' }}
       aria-label="About EVOLIX AI"
     >
-      {/* Animated radial gradient background */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(var(--brand-rgb),0.06) 0%, transparent 70%)',
-        }}
-        animate={{ opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-dot-pattern opacity-20 pointer-events-none" aria-hidden="true" />
+      <AboutParallaxBg />
 
       <div className="relative z-10 max-w-7xl mx-auto">
 

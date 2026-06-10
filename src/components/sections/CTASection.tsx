@@ -1,7 +1,34 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowLeft, Sparkles, Zap } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+
+function CtaParallaxBg() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const y = useTransform(scrollYProgress, [0, 1], ['-12%', '12%'])
+  return (
+    <div ref={ref} className="absolute inset-0 pointer-events-none overflow-hidden">
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px]"
+        style={{
+          y,
+          background: 'radial-gradient(ellipse, rgba(var(--brand-rgb),0.15) 0%, rgba(99,102,241,0.08) 40%, transparent 70%)',
+          filter: 'blur(60px)',
+        }}
+        animate={{ scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        aria-hidden="true"
+      />
+      <motion.div
+        className="absolute inset-0 bg-dot-pattern opacity-15"
+        style={{ y: useTransform(scrollYProgress, [0, 1], ['-6%', '6%']) }}
+        aria-hidden="true"
+      />
+    </div>
+  )
+}
 
 export default function CTASection() {
   const { t, lang } = useLanguage()
@@ -13,21 +40,7 @@ export default function CTASection() {
       className="py-20 px-6 relative overflow-hidden"
       style={{ background: 'var(--bg-primary)' }}
     >
-      {/* Animated aurora blobs */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse, rgba(var(--brand-rgb),0.15) 0%, rgba(99,102,241,0.08) 40%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-        animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.6, 1, 0.6],
-        }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        aria-hidden="true"
-      />
-      <div className="absolute inset-0 bg-dot-pattern opacity-15 pointer-events-none" aria-hidden="true" />
+      <CtaParallaxBg />
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}

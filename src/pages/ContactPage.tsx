@@ -34,8 +34,9 @@ export default function ContactPage() {
         <div className="max-w-3xl mx-auto mt-8">
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 16, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, ease }}
             className="flex justify-center mb-6"
           >
@@ -50,7 +51,8 @@ export default function ContactPage() {
 
           <motion.h1
             initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1, ease }}
             className="text-5xl md:text-6xl font-black mb-6 tracking-tight"
             style={{
@@ -64,9 +66,10 @@ export default function ContactPage() {
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.25, ease }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease }}
             className="text-xl leading-relaxed"
             style={{ color: 'var(--text-muted)' }}
           >

@@ -55,9 +55,10 @@ export default function ContactCards() {
             target={card.target}
             rel={card.rel}
             aria-label={card.ariaLabel}
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: idx * 0.12, ease }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7, delay: idx * 0.15, ease }}
             whileHover={{ y: -6, scale: 1.01 }}
             className="group relative flex flex-col items-center justify-center gap-5 p-12 rounded-3xl text-center overflow-hidden"
             style={{

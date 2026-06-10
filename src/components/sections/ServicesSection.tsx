@@ -1,6 +1,6 @@
 import { useLanguage } from '../../hooks/useLanguage'
 import { Brain, Cpu, Zap, Sparkles } from 'lucide-react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -52,6 +52,21 @@ function TiltCard({ children, className, style }: { children: React.ReactNode; c
     >
       {children}
     </motion.div>
+  )
+}
+
+function ParallaxBg() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  })
+  const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%'])
+  return (
+    <div ref={ref} className="absolute inset-0 pointer-events-none overflow-hidden">
+      <motion.div className="absolute inset-0 bg-dot-pattern opacity-10" style={{ y }} />
+      <motion.div className="absolute inset-0 cyber-grid opacity-30" style={{ y: useTransform(scrollYProgress, [0, 1], ['-5%', '5%']) }} />
+    </div>
   )
 }
 
@@ -112,9 +127,7 @@ export default function ServicesSection() {
       className="py-24 px-6 relative overflow-hidden"
       style={{ background: 'var(--bg-secondary)' }}
     >
-      {/* Background Decorations */}
-      <div className="absolute inset-0 bg-dot-pattern opacity-10 pointer-events-none" />
-      <div className="cyber-grid opacity-30" />
+      <ParallaxBg />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">

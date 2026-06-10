@@ -3,7 +3,6 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import Navbar from './Navbar'
 import Footer from './Footer'
 
-
 export default function Layout() {
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {
@@ -17,7 +16,7 @@ export default function Layout() {
       className="min-h-screen flex flex-col"
       style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}
     >
-      {/* Scroll Progress Bar — aurora gradient */}
+      {/* Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[2px] z-[100] origin-left"
         style={{
