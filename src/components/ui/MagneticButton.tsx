@@ -4,12 +4,10 @@ import { motion } from 'framer-motion'
 interface MagneticButtonProps {
   children: React.ReactNode
   className?: string
-  href?: string
-  onClick?: () => void
   style?: React.CSSProperties
 }
 
-export default function MagneticButton({ children, className, href, onClick, style }: MagneticButtonProps) {
+export default function MagneticButton({ children, className, style }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
 

@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ArrowLeft, Zap, ChevronDown, Terminal, Code, Play } from 'lucide-react'
+import { ArrowRight, ArrowLeft, ChevronDown, Terminal, Code, Play } from 'lucide-react'
 import { useLanguage } from '../../hooks/useLanguage'
 import MagneticButton from '../ui/MagneticButton'
 import { useEffect, useState, useRef } from 'react'

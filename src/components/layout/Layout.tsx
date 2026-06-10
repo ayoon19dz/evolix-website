@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import SmoothScroll from '../ui/SmoothScroll'
+
 
 export default function Layout() {
   const { scrollYProgress } = useScroll()

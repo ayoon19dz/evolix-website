@@ -3,7 +3,7 @@ import { useTheme } from '../../hooks/useTheme'
 import { useLanguage } from '../../hooks/useLanguage'
 import { Sun, Moon, Globe, Zap } from 'lucide-react'
 import { useEffect, useState, useCallback } from 'react'
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Navbar() {
   const { theme, toggle } = useTheme()
