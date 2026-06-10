@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound'
 import CustomCursor from './components/ui/CustomCursor'
 import IntroAnimation from './components/ui/IntroAnimation'
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import { useState, useCallback } from 'react'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <div style={{ opacity: introComplete ? 1 : 0, transition: 'opacity 0.5s ease' }}>
           <BrowserRouter>
             <Analytics />
+            <SpeedInsights />
             <CustomCursor />
             <Routes>
               <Route path="/" element={<Layout />}>
