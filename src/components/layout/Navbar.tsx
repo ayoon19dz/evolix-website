@@ -39,7 +39,7 @@ export default function Navbar() {
     })
 
     return () => observer.disconnect()
-  }, [location.pathname])
+  }, [])
 
   useEffect(() => {
     // Wait a bit for the page transition to finish before observing
@@ -60,9 +60,9 @@ export default function Navbar() {
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' })
       }
+      setMobileOpen(false)
     }, 100)
     
-    setMobileOpen(false)
     return () => clearTimeout(timeout)
   }, [location])
 

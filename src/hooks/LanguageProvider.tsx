@@ -1,17 +1,9 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { LanguageContext } from './LanguageContext'
 import { en } from '../data/locales/en'
-import type { Dictionary } from '../data/locales/en'
 import { ar } from '../data/locales/ar'
 
 type Language = 'en' | 'ar'
-
-interface LanguageContextType {
-  lang: Language
-  toggleLang: () => void
-  t: Dictionary
-}
-
-const LanguageContext = createContext<LanguageContextType | null>(null)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<Language>(
@@ -19,7 +11,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   )
 
   useEffect(() => {
-    // Update HTML attributes for RTL/LTR support
     const dir = lang === 'ar' ? 'rtl' : 'ltr'
     document.documentElement.dir = dir
     document.documentElement.lang = lang
@@ -34,5 +25,3 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     </LanguageContext.Provider>
   )
 }
-
-export const useLanguage = () => useContext(LanguageContext)!

@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import type { ReactNode } from 'react'
 
-const pageVariants = {
+const pageVariants: Variants = {
   initial: {
     opacity: 0,
     y: 16,
@@ -30,7 +30,7 @@ const pageVariants = {
 export default function PageTransition({ children }: { children: ReactNode }) {
   return (
     <motion.div
-      variants={pageVariants as any}
+      variants={pageVariants}
       initial="initial"
       animate="animate"
       exit="exit"

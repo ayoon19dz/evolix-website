@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { ThemeProvider } from './hooks/useTheme'
-import { LanguageProvider } from './hooks/useLanguage'
+import { ThemeProvider } from './hooks/ThemeProvider'
+import { LanguageProvider } from './hooks/LanguageProvider'
 import Layout from './components/layout/Layout'
 import HomePage from './pages/HomePage'
 import ContactPage from './pages/ContactPage'
